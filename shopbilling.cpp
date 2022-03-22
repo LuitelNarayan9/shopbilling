@@ -82,6 +82,9 @@ int main()
             rms.buyer();
             break;
         case 3:
+            cout<<"\n\nThank You for Using.\n\n";
+            cout<<"\nPress any key to Exit.\n"<<endl;
+            char c;cin>>c;
             exit(0);
             break;
         }
@@ -141,7 +144,7 @@ void RMS::showmenu1()
             displayproduct();
             break;
         case 6:
-            administrator();
+            return;
             break;
         default:
             cout << "Enter valid options\n";
@@ -372,7 +375,7 @@ void RMS::showmenu()
             displayusers();
             break;
         case 6:
-            administrator();
+            return;
             break;
         default:
             cout << "Enter valid options\n";
@@ -672,8 +675,11 @@ int RMS::login()
     system("cls");
     cout << "\n@@@@@@@@@@@@@@@@ LOGIN MENU @@@@@@@@@@@@@@@@@@\n";
     string id, pwd, add, n, i, p, a;
+    cout<<"\nEnter exit to go back to MENU\n";
     cout << "\n\t\tEnter ID: ";
     cin >> id;
+    if(id == "exit" || id == "EXIT" || id == "Exit")
+        buyer();
     int found = 0;
     cout << "\n\t\tEnter Password: ";
     cin >> pwd;
@@ -703,19 +709,19 @@ void RMS::administrator()
     static int chk = 0;
     if (chk == 0)
     {
+        cout<<"\nEnter exit for MENU\n";
         cout << "\n\t\tEnter ID: ";
         cin >> id;
+        if(id == "EXIT" || id == "Exit" || id == "exit")
+            main();
         cout << "\n\t\tEnter Password: ";
         cin >> pwd;
-        chk = 1;
     }
-    // chk = 1;
-    if (chk == 1)
-    {
-        if (id == "admin-1" && pwd == "admin-1")
+    
+        if (id == "ADMIN" && pwd == "ADMIN")
         {
-
-            cout << "\n\n\t\t\tLoading ";
+            chk = 1;
+            cout << "\n\n\t\t\tAuthenticated Now Loading ";
             for (int i = 0; i < 4; i++)
             {
                 putchar('.');
@@ -760,13 +766,13 @@ void RMS::administrator()
         }
         else
         {
-            cout << "INVALID ADMIN CREDANTIALS\n";
+            cout << "\nINVALID ADMIN CREDANTIALS\n";
             administrator();
+            chk = 0;
         }
-    }
-    else{
-        administrator();
-    }
+    
+
+    // chk = 1;
 }
 
 // user menu options
@@ -813,7 +819,7 @@ void RMS::profile()
     cout << "\t\t\tPROFILE\n";
     cout << "-------------------------------------------------------------------\n";
     cout << "| NAME " << setw(20) << " ID " << setw(20) << " PASSWORD " << setw(20) << " ADDRESS " << setw(1) << "|\n";
-    cout << setw(5) << " " << cs.Name << setw(20) << cs.Id << setw(20) << cs.Pass << setw(20) << cs.Add << setw(1) << endl;
+    cout << " " << cs.Name << setw(20) << cs.Id << setw(20) << cs.Pass << setw(20) << cs.Add << setw(1) << endl;
     cout << "\t\t\n===================================================================\n";
 }
 
@@ -839,7 +845,7 @@ void RMS::buyer()
             system("cls");
             if (login() == 1)
             {
-                cout << "\t\t\tLoading ";
+                cout << "\n\n\t\t\tLoading ";
                 for (int i = 0; i < 5; i++)
                 {
                     putchar('.');
